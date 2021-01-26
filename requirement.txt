@@ -3,3 +3,4 @@ mysql.connector
 pandas
 sshtunnel
 requests
+jupyter
