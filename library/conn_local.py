@@ -4,6 +4,7 @@ import pandas.io.sql as psql
 from ASP_PASS import ASP_PASS
 local_db = ASP_PASS.local_db()
 
+
 def conn_local():
     try:
         dbcon = mydb.connect(
