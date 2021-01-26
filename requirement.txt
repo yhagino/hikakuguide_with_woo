@@ -4,3 +4,4 @@ pandas
 sshtunnel
 requests
 jupyter
+jupyterlab
