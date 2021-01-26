@@ -8,7 +8,7 @@ ave_db = ASP_PASS.ave_db()
 def ssh_option():
     ssh = sshOptions["bastion"]
     server = SSHTunnelForwarder(
-        (ssh['host'], 10022),
+        (ssh['host'], ssh["port"]),
         ssh_username=ssh['ssh_username'],
         ssh_password=ssh['ssh_password'],
         ssh_pkey=ssh['ssh_private_key'],
