@@ -9,6 +9,12 @@ def get_name_from_local():
     return result_data
 
 
+def get_name_from_ssh():
+    sql = 'SELECT post_name FROM wp_posts WHERE post_name REGEXP "^[0-9]*[a-z][-]*"'
+    result_data = conn_ssh.select_data(sql)
+    return result_data
+
+
 if __name__ == '__main__':
-    result_data = get_name_from_local()
+    result_data = get_name_from_ssh()
     print(result_data)

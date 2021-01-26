@@ -1,9 +1,11 @@
 import mysql.connector as mydb
 from sshtunnel import SSHTunnelForwarder
+import pandas.io.sql as psql
 
 from ASP_PASS import ASP_PASS
 sshOptions = ASP_PASS.ave_ssh_option()
 ave_db = ASP_PASS.ave_db()
+
 
 def ssh_option():
     ssh = sshOptions["bastion"]
@@ -33,14 +35,19 @@ def conn_ssh():
         dbcon.ping(reconnect=True)
         print(f'ssh conn: {dbcon.is_connected()}')
         dbcur = dbcon.cursor()
+        return dbcon, dbcur
     except Exception as e:
         print(f'error {str(e)}')
         dbcon.rollback()
         raise
-    finally:
-        dbcur.close()
-        dbcon.close()
-        server.stop()
+
+
+def select_data(sql):
+    dbcon, dbcur = conn_ssh()
+    result_data = psql.read_sql(sql, dbcon)
+    dbcur.close()
+    dbcon.close()
+    return result_data
 
 
 if __name__ == '__main__':
