@@ -1,5 +1,4 @@
 import pandas as pd
-from pytz import timezone
 from datetime import datetime
 
 from library import publish_sql
@@ -20,7 +19,6 @@ def create_add_unique_id():
     df_new = pd.DataFrame(dd_unique_id, columns=['url_id'])
     df_new = pd.merge(df_new, local_data, how='left')
     df_new = df_new.rename(columns={'url_id': 'post_name', 'name': 'post_title'})
-    df_new.to_csv('../../jupyter/df_new.csv')
     return df_new
 
 
@@ -75,7 +73,7 @@ def create_add_attachment_list(df_new):
     df_new['comment_count'] = 0
 
     df_new['guid'] = 'img/card/' + df_new['post_name'] + '.jpg'
-    df_new = df_new.merge(df_new, ssh_data, on='post_name', how='left')
+    df_new = pd.merge(df_new, ssh_data, how='left')
     df_new = df_new.drop(columns=['post_name'])
 
     df_add = df_new.reindex(columns=['post_author', 'post_date', 'post_date_gmt',
