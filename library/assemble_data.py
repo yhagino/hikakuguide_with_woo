@@ -88,5 +88,9 @@ def create_add_attachment_list(df_new):
     list_data = df_add.values.tolist()
     return list_columns, list_data
 
+
+# def create_add_terms_list():
+
+
 if __name__ == '__main__':
     create_add_unique_id()
